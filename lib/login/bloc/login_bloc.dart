@@ -1,7 +1,9 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:http/http.dart' as http;
 import 'package:needy_frontend/utils/utils.dart';
 
 part 'login_event.dart';
@@ -55,7 +57,25 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       final passwordValid = state.password.length >= 6;
 
       if (emailValid && passwordValid) {
-        // TODO: Add login logic
+        final response = await http.post(
+          Uri.parse('https://api/authorization/authenticate'),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+          },
+          body: jsonEncode(<String, dynamic>{
+            'email': state.email,
+            'password': state.password,
+          }),
+        );
+
+        if (response.statusCode == 200) {
+          final data = jsonDecode(response.body);
+          print(data);
+          emit(state.copyWith(status: LoginStatus.success));
+        } else {
+          emit(state.copyWith(status: LoginStatus.error));
+          throw Exception('Error al llamar a la API');
+        }
         emit(state.copyWith(status: LoginStatus.success));
       } else {
         emit(
