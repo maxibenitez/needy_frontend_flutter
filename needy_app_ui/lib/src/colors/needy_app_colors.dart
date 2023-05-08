@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
 abstract class NAColors {
- /// Black
+  ///Primary
+  static const Color primary = Color(0xFF0A2472);
+
+  /// Black
   static const Color black = Color(0xFF000000);
 
   /// White
@@ -89,7 +92,4 @@ abstract class NAColors {
     800: Color(0xFF5F0F40),
     900: Color(0xFF3D0026),
   });
-
-
-
 }

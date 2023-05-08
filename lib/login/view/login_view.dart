@@ -12,75 +12,77 @@ class LoginView extends StatelessWidget {
   Widget build(BuildContext context) {
     final status = context.select((LoginBloc bloc) => bloc.state.status);
 
-    return MaterialApp(
-      home: Scaffold(
-        backgroundColor: NAColors.white,
+    return BlocListener<LoginBloc, LoginState>(
+      listener: (context, state) {
+        if (state.status == LoginStatus.error) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text("Error al iniciar sesión"),
+              duration: Duration(seconds: 2),
+            ),
+          );
+        }
+        if (state.status == LoginStatus.success) {
+          Navigator.of(context).pushAndRemoveUntil(
+            HomePage.route(),
+            (route) => false,
+          );
+        }
+      },
+      child: Scaffold(
+        backgroundColor: NAColors.primary,
         appBar: NAAppBar(
-          elevation: 0,
-          backgroundColor: NAColors.oceanBlue,
-          widgetTitle: Text(
-            "Needy App",
-            style: NATextStyle.headline3.copyWith(color: NAColors.white),
-          ),
+          widgetTitle: Text("Login", style: NATextStyle.caption),
         ),
-        body: BlocListener<LoginBloc, LoginState>(
-          listener: (context, state) {
-            if (state.status == LoginStatus.error) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text("Error al iniciar sesión"),
-                  duration: Duration(seconds: 2),
-                ),
-              );
-            }
-            if (state.status == LoginStatus.success) {
-              Navigator.of(context).pushAndRemoveUntil(
-                HomePage.route(),
-                (route) => false,
-              );
-            }
-          },
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: NASpacing.s20),
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              "NEEDY",
+              style: NATextStyle.display3
+                  .copyWith(color: NAColors.white, fontSize: 100),
+            ),
+            Container(
+              width: double.infinity,
+              height: MediaQuery.of(context).size.height * 0.6,
+              decoration: BoxDecoration(
+                color: NAColors.white,
+                borderRadius: BorderRadius.circular(20),
+              ),
+              padding: const EdgeInsets.symmetric(horizontal: NASpacing.s20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const SizedBox(height: NASpacing.s20),
+                  const EmailInput(),
+                  const SizedBox(height: NASpacing.s20),
+                  const PasswordInput(),
+                  status == LoginStatus.loading
+                      ? const CircularProgressIndicator()
+                      : NAButton.primary(
+                          text: "Ingresar",
+                          onPressed: () {
+                            context.read<LoginBloc>().add(
+                                  const LoginSubmitted(),
+                                );
+                          },
+                        ),
+                  const SizedBox(height: NASpacing.s20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const SizedBox(height: NASpacing.xxxlg),
-                      const EmailInput(),
-                      const SizedBox(height: NASpacing.s20),
-                      const PasswordInput(),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: TextButton(
-                            onPressed: () {},
-                            child: const Text("Olvidaste tu contraseña?")),
-                      ),
-                      status == LoginStatus.loading
-                          ? const CircularProgressIndicator()
-                          : NAOutlinedButton.primary(
-                              text: "Ingresar",
-                              onPressed: () {
-                                context.read<LoginBloc>().add(
-                                      const LoginSubmitted(),
-                                    );
-                              },
-                            ),
-                      const SizedBox(height: NASpacing.s20),
-                      NAOutlinedButton.primary(
-                        text: "Registrarse",
-                        onPressed: () {
-                          Navigator.of(context).push(SignUpPage.route());
-                        },
-                      ),
+                      const Text("No tienes una cuenta?"),
+                      TextButton(
+                          onPressed: () {
+                            Navigator.of(context).push(SignUpPage.route());
+                          },
+                          child: const Text("Registrate")),
                     ],
                   ),
-                ),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

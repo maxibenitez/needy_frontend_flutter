@@ -31,6 +31,9 @@ flutter:
           weight: 400
         - asset: assets/fonts/NotoSansDisplay-SemiBold.ttf
           weight: 600
+    - family: Roboto
+      fonts:
+        - asset: assets/fonts/Roboto-Regular.ttf
   
 
 flutter_gen:

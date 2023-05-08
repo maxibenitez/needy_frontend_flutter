@@ -105,7 +105,6 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
 
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
-        print(data);
         emit(state.copyWith(status: SignUpStatus.success));
       } else {
         emit(state.copyWith(status: SignUpStatus.error));

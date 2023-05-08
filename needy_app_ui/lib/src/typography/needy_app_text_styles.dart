@@ -4,14 +4,15 @@ import 'package:needy_app_ui/needy_app_ui.dart';
 //extension for font weights
 
 abstract class NATextStyle {
-  static const Color defaultColor = NAColors.black;
+  static const Color defaultColor = NAColors.white;
 
   /// Base Text Style
   static const _baseTextStyle = TextStyle(
     package: 'needy_app_ui',
     fontWeight: NAFontWeight.regular,
-    fontFamily: 'NotoSansDisplay',
+    fontFamily: 'Roboto',
     color: NAColors.black,
+    fontStyle: FontStyle.normal,
     textBaseline: TextBaseline.alphabetic,
   );
 
@@ -27,7 +28,7 @@ abstract class NATextStyle {
   /// Display 3 Text Style
   static final TextStyle display3 = _baseTextStyle.copyWith(
     fontSize: 45,
-    fontWeight: NAFontWeight.bold,
+    fontWeight: NAFontWeight.regular,
     height: 1.15,
     color: defaultColor,
   );

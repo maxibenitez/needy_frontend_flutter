@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:needy_app_ui/needy_app_ui.dart';
 
-class NAOutlinedButton extends StatelessWidget {
-  const NAOutlinedButton({
+class NAButton extends StatelessWidget {
+  const NAButton({
     super.key,
     this.backgroundColor,
     required this.text,
@@ -13,26 +13,36 @@ class NAOutlinedButton extends StatelessWidget {
   });
 
   /// Primary button which background color is the primary color of the theme
-  const NAOutlinedButton.primary({
+  const NAButton.primary({
     super.key,
     required this.text,
     this.onPressed,
     this.icon,
-  })  : backgroundColor = NAColors.oceanBlue,
-        borderColor = NAColors.oceanBlue,
+  })  : backgroundColor = NAColors.primary,
+        borderColor = NAColors.primary,
         textColor = NAColors.white;
 
   /// Secondary button which background color is the secondary color of the theme
-  const NAOutlinedButton.secondary({
+  const NAButton.secondary({
     super.key,
     required this.text,
+    required this.onPressed,
     this.icon,
-  })  : backgroundColor = NAColors.grey,
-        onPressed = null,
+  })  : backgroundColor = NAColors.white,
         borderColor = NAColors.white,
-        textColor = NAColors.white;
+        textColor = NAColors.oceanBlue;
 
-  const NAOutlinedButton.red({
+  /// Tertiary button which background color is the lightblue color
+  const NAButton.tertiary({
+    super.key,
+    required this.text,
+    required this.onPressed,
+    this.icon,
+  })  : backgroundColor = NAColors.lightBlue200,
+        borderColor = null,
+        textColor = NAColors.oceanBlue;
+
+  const NAButton.red({
     super.key,
     required this.text,
     this.onPressed,
@@ -41,7 +51,7 @@ class NAOutlinedButton extends StatelessWidget {
         borderColor = NAColors.red,
         textColor = NAColors.white;
 
-  const NAOutlinedButton.home({
+  const NAButton.home({
     super.key,
     required this.text,
     this.onPressed,
@@ -70,46 +80,34 @@ class NAOutlinedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isInactive = onPressed == null;
     final theme = Theme.of(context);
-    return OutlinedButton(
-      onPressed: onPressed,
-      style: OutlinedButton.styleFrom(
-        disabledBackgroundColor: theme.colorScheme.background,
-        backgroundColor: backgroundColor,
-        side: borderColor == null
-            ? null
-            : BorderSide(
-                color: onPressed == null
-                    ? (theme.colorScheme.onBackground)
-                    : borderColor!,
-              ),
-        padding: const EdgeInsets.symmetric(
-          horizontal: NASpacing.md,
-          vertical: NASpacing.md,
-        ),
+    return Container(
+      height: 48,
+      width: 320,
+      decoration: const BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(100)),
       ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          if (icon != null)
-            Padding(
-              padding: const EdgeInsets.only(right: 10),
-              child: icon,
-            ),
-          SizedBox(
-            child: Text(
+      child: OutlinedButton(
+        onPressed: onPressed,
+        style: OutlinedButton.styleFrom(
+          backgroundColor: backgroundColor,
+          foregroundColor: textColor,
+          shape: const StadiumBorder(),
+          shadowColor: Colors.transparent,
+          textStyle: theme.textTheme.labelLarge,
+          side: BorderSide(
+            width: 2,
+            color: borderColor ?? Colors.transparent,
+          ),
+        ),
+        child: icon ??
+            Text(
               text,
               textAlign: TextAlign.center,
-              style: NATextStyle.button.copyWith(
-                color:
-                    isInactive ? (theme.colorScheme.onBackground) : textColor,
-                fontWeight: FontWeight.w500,
+              style: theme.textTheme.labelLarge?.copyWith(
+                color: textColor,
               ),
             ),
-          ),
-        ],
       ),
     );
   }

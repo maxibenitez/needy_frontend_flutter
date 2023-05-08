@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:needy_app_ui/needy_app_ui.dart';
 import 'package:needy_frontend/home/home.dart';
+import 'package:needy_frontend/want_to_help/want_to_help.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -16,23 +17,35 @@ class HomeView extends StatelessWidget {
         }
       },
       child: Scaffold(
-        appBar: NAAppBar(
-          widgetTitle: Text("Inicio",
-              style: NATextStyle.overline.copyWith(color: Colors.white)),
-        ),
+        backgroundColor: NAColors.primary,
+        appBar: const NAAppBar(),
         body: Align(
           alignment: Alignment.center,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              NAOutlinedButton.home(
+              const SizedBox(height: 90),
+              Text(
+                "Welcome to Needy!",
+                style: NATextStyle.headline3.copyWith(fontSize: 20),
+                softWrap: true,
+              ),
+              const SizedBox(height: NASpacing.xxxlg),
+              NAButton.secondary(
                 text: "Necesito Ayuda",
                 onPressed: () {},
               ),
-              const SizedBox(height: NASpacing.s30),
-              NAOutlinedButton.home(
+              const SizedBox(height: 10),
+              Text(
+                "---------------------",
+                style: NATextStyle.subtitle1.copyWith(color: NAColors.white),
+              ),
+              const SizedBox(height: 10),
+              NAButton.secondary(
                 text: "Quiero Ayudar",
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).push(WantToHelpPage.route());
+                },
               ),
             ],
           ),

@@ -150,7 +150,7 @@ class NATextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ConstrainedBox(
-      constraints: const BoxConstraints(minHeight: 80),
+      constraints: const BoxConstraints(minHeight: 70),
       child: TextFormField(
         key: key,
         initialValue: initialValue,
@@ -169,7 +169,7 @@ class NATextField extends StatelessWidget {
         onFieldSubmitted: onSubmitted,
         decoration: InputDecoration(
           hintText: hintText,
-          hintStyle: NATextStyle.bodyText1,
+          hintStyle: NATextStyle.bodyText1.copyWith(color: NAColors.grey),
           errorText: errorText,
           prefixIcon: prefix,
           suffixIcon: suffix,

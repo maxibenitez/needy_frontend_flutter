@@ -102,13 +102,13 @@ class NAAppBar extends StatelessWidget implements PreferredSizeWidget {
       title: widgetTitle,
       titleTextStyle: titleTextStyle ?? NATextStyle.display2,
       leading: leading,
-      backgroundColor: backgroundColor ?? NAColors.oceanBlue,
-      elevation: elevation,
+      backgroundColor: backgroundColor ?? NAColors.primary,
+      elevation: elevation ?? 0,
       centerTitle: centerTitle,
       toolbarHeight: toolbarHeight,
       leadingWidth: leadingWidth,
       actions: actions,
-      automaticallyImplyLeading: automaticallyImplyLeading ?? true,
+      automaticallyImplyLeading: true,
     );
   }
 
