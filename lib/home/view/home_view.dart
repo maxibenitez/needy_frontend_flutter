@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:needy_app_ui/needy_app_ui.dart';
 import 'package:needy_frontend/home/home.dart';
-import 'package:needy_frontend/want_to_help/want_to_help.dart';
+import 'package:needy_frontend/skills/skills.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -44,7 +44,7 @@ class HomeView extends StatelessWidget {
               NAButton.secondary(
                 text: "Quiero Ayudar",
                 onPressed: () {
-                  Navigator.of(context).push(WantToHelpPage.route());
+                  Navigator.of(context).push(SkillsPage.route());
                 },
               ),
             ],
