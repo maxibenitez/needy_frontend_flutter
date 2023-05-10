@@ -59,6 +59,12 @@ class SkillsView extends StatelessWidget {
                   )
                   .toList(),
             ),
+            const Spacer(),
+            NAButton.primary(
+                text: "Continuar",
+                onPressed: () {
+                  //TODO: Implement this
+                }),
           ]),
         ),
       ),

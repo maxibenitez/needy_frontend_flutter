@@ -24,53 +24,50 @@ class SignUpView extends StatelessWidget {
           widgetTitle: Text("Sign up", style: NATextStyle.caption),
         ),
         backgroundColor: NAColors.primary,
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              "NEEDY",
-              style: NATextStyle.display3
-                  .copyWith(color: NAColors.white, fontSize: 80),
-            ),
-            Container(
-              width: double.infinity,
-              height: MediaQuery.of(context).size.height * 0.7,
-              decoration: BoxDecoration(
-                color: NAColors.white,
-                borderRadius: BorderRadius.circular(20),
-              ),
-              padding: const EdgeInsets.symmetric(horizontal: NASpacing.s20),
-              child: ListView(
-                children: [
-                  const SizedBox(height: NASpacing.xlg),
-                  const _NameTextFields(),
-                  const CITextfield(),
-                  const EmailTextField(),
-                  const PasswordTextfield(),
-                  const PhoneTextfield(),
-                  const InstagramAccountTextfield(),
-                  const AddressTextfield(),
-                  const DateOfBirthTextField(),
-                  GenderTextFieldDropDown(),
-                  ZoneTextFieldDropDown(),
-                  const SizedBox(height: NASpacing.xlg),
-                  Align(
-                    alignment: Alignment.center,
-                    child: NAButton.primary(
-                      onPressed: () {
-                        context.read<SignUpBloc>().add(
-                              const SignUpSubmitted(),
-                            );
-                      },
-                      text: "Registrarse",
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
+        body: NAScreen(
+          upperBody: Text(
+            "NEEDY",
+            style: NATextStyle.display3
+                .copyWith(color: NAColors.white, fontSize: 80),
+          ),
+          lowerBodyChild: const _Body(),
         ),
       ),
+    );
+  }
+}
+
+class _Body extends StatelessWidget {
+  const _Body();
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      children: [
+        const SizedBox(height: NASpacing.xlg),
+        const _NameTextFields(),
+        const CITextfield(),
+        const EmailTextField(),
+        const PasswordTextfield(),
+        const PhoneTextfield(),
+        const InstagramAccountTextfield(),
+        const AddressTextfield(),
+        const DateOfBirthTextField(),
+        GenderTextFieldDropDown(),
+        ZoneTextFieldDropDown(),
+        const SizedBox(height: NASpacing.xlg),
+        Align(
+          alignment: Alignment.center,
+          child: NAButton.primary(
+            onPressed: () {
+              context.read<SignUpBloc>().add(
+                    const SignUpSubmitted(),
+                  );
+            },
+            text: "Registrarse",
+          ),
+        ),
+      ],
     );
   }
 }
