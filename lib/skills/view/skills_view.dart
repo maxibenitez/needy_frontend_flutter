@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:needy_app_ui/needy_app_ui.dart';
-import 'package:needy_frontend/profile/profile.dart';
+import 'package:needy_frontend/main_options/view/main_options_page.dart';
 import 'package:needy_frontend/skills/skills.dart';
 
 class SkillsView extends StatelessWidget {
@@ -64,8 +64,7 @@ class SkillsView extends StatelessWidget {
             NAButton.primary(
                 text: "Continuar",
                 onPressed: () {
-                  //TODO: Implement this
-                  Navigator.of(context).push(ProfilePage.route());
+                  Navigator.of(context).push(MainOptionsPage.route());
                 }),
           ]),
         ),
