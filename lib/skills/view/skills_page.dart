@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:needy_frontend/skills/bloc/skills_bloc.dart';
 import 'package:needy_frontend/skills/skills.dart';
 
 class SkillsPage extends StatelessWidget {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:needy_app_ui/needy_app_ui.dart';
 import 'package:needy_frontend/main_options/main_options.dart';
+import 'package:needy_frontend/view_needies/view_needies.dart';
 
 class MainOptionsView extends StatelessWidget {
   const MainOptionsView({Key? key}) : super(key: key);
@@ -39,7 +40,7 @@ class MainOptionsView extends StatelessWidget {
               NAButton.secondary(
                 text: "Ver necesidades",
                 onPressed: () {
-                  //TODO: Implement this
+                 Navigator.of(context).push(ViewNeediesPage.route());
                 },
               ),
             ],
