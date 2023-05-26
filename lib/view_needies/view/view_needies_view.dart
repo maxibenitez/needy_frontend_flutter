@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:needy_app_ui/needy_app_ui.dart';
 import 'package:needy_frontend/models/skill.dart';
+import 'package:needy_frontend/needy/view/view.dart';
 import 'package:needy_frontend/view_needies/view_needies.dart';
 
 class ViewNeediesView extends StatelessWidget {
@@ -70,43 +71,12 @@ class Filter extends StatelessWidget {
                 height: 10,
               ),
               itemBuilder: (context, index) {
-                return Container(
-                  height: 150,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: NAColors.primary,
-                  ),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Image.network(
-                          // needies[index].image,
-                          "https://picsum.photos/200/300",
-                          width: 50,
-                          height: 50,
-                          fit: BoxFit.fill,
-                        ),
-                        Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                needies[index].name,
-                                style: NATextStyle.subtitle1
-                                    .copyWith(fontWeight: FontWeight.bold),
-                              ),
-                              Text(
-                                // needies[index].location,
-                                "Location: Parque Batlle",
-                                style: NATextStyle.subtitle2,
-                              ),
-                              Text(
-                                // needies[index].description,
-                                "Date: 12/12/2021",
-                                style: NATextStyle.subtitle2,
-                              ),
-                            ])
-                      ]),
+                return InkWell(
+                  onTap: () {
+                    Navigator.of(context).push(NeedyPage.route());
+                  },
+                  child: NASmallContainer(
+                      child: _NeedyInfo(needy: needies[index])),
                 );
               },
               itemCount: needies.length,
@@ -115,5 +85,46 @@ class Filter extends StatelessWidget {
         ),
       ],
     );
+  }
+}
+
+class _NeedyInfo extends StatelessWidget {
+  const _NeedyInfo({
+    required this.needy,
+  });
+
+  final Skill needy;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+      Image.network(
+        // needies[index].image,
+        "https://picsum.photos/200/300",
+        width: 50,
+        height: 50,
+        fit: BoxFit.fill,
+      ),
+      Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              needy.name,
+              style:
+                  NATextStyle.subtitle1.copyWith(fontWeight: FontWeight.bold),
+            ),
+            Text(
+              // needies[index].location,
+              "Location: Parque Batlle",
+              style: NATextStyle.subtitle2,
+            ),
+            Text(
+              // needies[index].description,
+              "Date: 12/12/2021",
+              style: NATextStyle.subtitle2,
+            ),
+          ])
+    ]);
   }
 }

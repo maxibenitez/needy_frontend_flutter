@@ -3,3 +3,7 @@ export 'needy_app_button.dart';
 export 'needy_app_loader.dart';
 export 'needy_app_screen.dart';
 export 'needy_app_text_field.dart';
+export 'needy_container.dart';
+export 'needy_picture_container.dart';
+export 'needy_small_container.dart';
+export 'square_circle_container.dart';

@@ -10,7 +10,7 @@ abstract class NATextStyle {
   static const _baseTextStyle = TextStyle(
     package: 'needy_app_ui',
     fontWeight: NAFontWeight.regular,
-    fontFamily: 'Roboto',
+    fontFamily: 'NotoSansDisplay',
     color: NAColors.black,
     fontStyle: FontStyle.normal,
     textBaseline: TextBaseline.alphabetic,
