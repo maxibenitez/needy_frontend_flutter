@@ -35,6 +35,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         status: ProfileStatus.loaded,
         myNeeds: skillsSuggested,
         myApplies: skillsApplied,
+        mySkills: mySkills,
       ));
     } catch (e) {
       emit(state.copyWith(status: ProfileStatus.error));
