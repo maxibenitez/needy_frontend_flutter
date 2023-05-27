@@ -4,20 +4,20 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:needy_frontend/models/models.dart';
 
-part 'view_needies_event.dart';
-part 'view_needies_state.dart';
+part 'search_needies_event.dart';
+part 'search_needies_state.dart';
 
-class ViewNeediesBloc extends Bloc<ViewNeediesEvent, ViewNeediesState> {
-  ViewNeediesBloc() : super(const ViewNeediesState.initial()) {
+class SearchNeediesBloc extends Bloc<SearchNeediesEvent, SearchNeediesState> {
+  SearchNeediesBloc() : super(const SearchNeediesState.initial()) {
     on<ViewNeediesEventStarted>(_onViewNeediesEventStarted);
     on<SearchNeedyChanged>(_onSearchNeedyChanged);
   }
 
   FutureOr<void> _onViewNeediesEventStarted(
     ViewNeediesEventStarted event,
-    Emitter<ViewNeediesState> emit,
+    Emitter<SearchNeediesState> emit,
   ) async {
-    emit(state.copyWith(status: ViewNeediesStatus.loading));
+    emit(state.copyWith(status: SearchNeediesStatus.loading));
     try {
       // final skillsSuggested = await _skillsRepository.getSkillsSuggested();
       final skillsSuggested = [
@@ -37,17 +37,17 @@ class ViewNeediesBloc extends Bloc<ViewNeediesEvent, ViewNeediesState> {
         const Skill(name: "Mecánico"),
       ];
       emit(state.copyWith(
-        status: ViewNeediesStatus.loaded,
+        status: SearchNeediesStatus.loaded,
         skillsSuggested: skillsSuggested,
       ));
     } catch (e) {
-      emit(state.copyWith(status: ViewNeediesStatus.error));
+      emit(state.copyWith(status: SearchNeediesStatus.error));
     }
   }
 
   FutureOr<void> _onSearchNeedyChanged(
     SearchNeedyChanged event,
-    Emitter<ViewNeediesState> emit,
+    Emitter<SearchNeediesState> emit,
   ) async {
     final query = event.query;
     if (query.isEmpty) {
@@ -68,7 +68,7 @@ class ViewNeediesBloc extends Bloc<ViewNeediesEvent, ViewNeediesState> {
         const Skill(name: "Mecánico"),
       ];
       emit(state.copyWith(
-        status: ViewNeediesStatus.loaded,
+        status: SearchNeediesStatus.loaded,
         skillsSuggested: skillsSuggested,
       ));
       return;

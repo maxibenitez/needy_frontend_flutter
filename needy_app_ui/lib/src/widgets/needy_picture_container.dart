@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:needy_app_ui/needy_app_ui.dart';
 
 class NAPictureContainer extends StatelessWidget {
-  const NAPictureContainer({required this.src, super.key});
+  const NAPictureContainer({this.src, this.noPhotoWidget, super.key});
 
-  final String src;
+  final Widget? noPhotoWidget;
+  final String? src;
 
   @override
   Widget build(BuildContext context) {
@@ -20,13 +21,14 @@ class NAPictureContainer extends StatelessWidget {
         ),
       ),
       child: ClipOval(
-        child: Image.network(
-          // needies[index].image,
-          src,
-          width: 200,
-          height: 200,
-          fit: BoxFit.cover,
-        ),
+        child: noPhotoWidget ??
+            Image.network(
+              // needies[index].image,
+              src ?? "",
+              width: 200,
+              height: 200,
+              fit: BoxFit.cover,
+            ),
       ),
     );
   }

@@ -1,32 +1,32 @@
-part of 'view_needies_bloc.dart';
+part of 'search_needies_bloc.dart';
 
-enum ViewNeediesStatus {
+enum SearchNeediesStatus {
   initial,
   loading,
   loaded,
   error,
 }
 
-class ViewNeediesState extends Equatable {
-  const ViewNeediesState({
+class SearchNeediesState extends Equatable {
+  const SearchNeediesState({
     required this.status,
     required this.skillsSuggested,
   });
 
-  const ViewNeediesState.initial()
+  const SearchNeediesState.initial()
       : this(
-          status: ViewNeediesStatus.initial,
+          status: SearchNeediesStatus.initial,
           skillsSuggested: const [],
         );
 
-  final ViewNeediesStatus status;
+  final SearchNeediesStatus status;
   final List<Skill> skillsSuggested;
 
-  ViewNeediesState copyWith({
-    ViewNeediesStatus? status,
+  SearchNeediesState copyWith({
+    SearchNeediesStatus? status,
     List<Skill>? skillsSuggested,
   }) {
-    return ViewNeediesState(
+    return SearchNeediesState(
       status: status ?? this.status,
       skillsSuggested: skillsSuggested ?? this.skillsSuggested,
     );

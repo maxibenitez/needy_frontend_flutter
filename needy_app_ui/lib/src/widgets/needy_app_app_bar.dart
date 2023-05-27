@@ -4,23 +4,6 @@ import 'package:needy_app_ui/needy_app_ui.dart';
 /// {@template app_app_bar}
 /// A custom app bar widget.
 class NAAppBar extends StatelessWidget implements PreferredSizeWidget {
-  /// {@macro app_app_bar}
-  const NAAppBar({
-    super.key,
-    this.widgetTitle,
-    this.textTitle,
-    this.titleTextStyle,
-    this.leading,
-    this.backgroundColor,
-    this.elevation,
-    this.centerTitle,
-    this.toolbarHeight,
-    this.leadingWidth,
-    this.actions,
-    this.buttonStyle,
-    this.automaticallyImplyLeading,
-  });
-
   /// The AppBar if the user wants to add actions.
   NAAppBar.actionAppBar({
     super.key,
@@ -58,6 +41,49 @@ class NAAppBar extends StatelessWidget implements PreferredSizeWidget {
         centerTitle = true,
         toolbarHeight = 50,
         leadingWidth = 60;
+
+  /// {@macro app_app_bar}
+  const NAAppBar({
+    super.key,
+    this.widgetTitle,
+    this.textTitle,
+    this.titleTextStyle,
+    this.leading,
+    this.backgroundColor,
+    this.elevation,
+    this.centerTitle,
+    this.toolbarHeight,
+    this.leadingWidth,
+    this.actions,
+    this.buttonStyle,
+    this.automaticallyImplyLeading,
+  });
+
+  NAAppBar.common({
+    required BuildContext context,
+    required String title,
+    super.key,
+    this.textTitle,
+    this.titleTextStyle,
+    this.elevation,
+    this.centerTitle,
+    this.toolbarHeight,
+    this.leadingWidth,
+    this.actions,
+    this.buttonStyle,
+    this.automaticallyImplyLeading,
+  })  : backgroundColor = Colors.transparent,
+        widgetTitle = Text(
+          title,
+          style: NATextStyle.caption.copyWith(color: NAColors.primary),
+        ),
+        leading = IconButton(
+          icon: const Icon(
+            Icons.arrow_back_ios,
+            color: NAColors.primary,
+          ),
+          onPressed: () => Navigator.of(context).pop(),
+        );
 
   /// The text for the title of the app bar is a Text.
   final String? textTitle;
