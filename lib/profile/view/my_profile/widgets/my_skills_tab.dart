@@ -6,27 +6,43 @@ class MySkillsTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.all(20),
-      child: Row(
+    const squareHeight = 50.0;
+    return Padding(
+      padding: const EdgeInsets.all(20),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          SquareCircleContainer(
-            title: "Cocina",
-            icon: Icon(Icons.cookie),
+          const Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SquareCircleContainer(
+                title: "Cocina",
+                icon: Icon(Icons.cookie),
+                height: squareHeight,
+              ),
+              SizedBox(
+                width: NASpacing.s10,
+              ),
+              SquareCircleContainer(
+                title: "Tecnologia",
+                icon: Icon(Icons.code),
+                height: squareHeight,
+              ),
+              SizedBox(
+                width: NASpacing.s10,
+              ),
+              SquareCircleContainer(
+                title: "Cocina",
+                icon: Icon(Icons.add),
+                height: squareHeight,
+              ),
+            ],
           ),
-          SizedBox(
-            width: NASpacing.s10,
-          ),
-          SquareCircleContainer(
-            title: "Tecnologia",
-            icon: Icon(Icons.code),
-          ),
-          SizedBox(
-            width: NASpacing.s10,
-          ),
-          SquareCircleContainer(
-            title: "Cocina",
-            icon: Icon(Icons.add),
+          NAButton.primary(
+            text: "Add Need",
+            onPressed: () {
+              //TODO: Implement this
+            },
           ),
         ],
       ),

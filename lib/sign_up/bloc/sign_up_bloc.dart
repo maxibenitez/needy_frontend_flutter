@@ -85,7 +85,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     final formattedDate = DateFormat('yyyy-MM-dd').format(date);
     try {
       final response = await http.post(
-        Uri.parse('https://api/users/insert-user'),
+        Uri.parse('https://localhost:7008/api/auth/register'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },

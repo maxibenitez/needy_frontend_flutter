@@ -33,7 +33,9 @@ class HomeView extends StatelessWidget {
               const SizedBox(height: NASpacing.xxxlg),
               NAButton.secondary(
                 text: "Necesito Ayuda",
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).push(NeedHelpHomePage.route());
+                },
               ),
               const SizedBox(height: 10),
               Text(

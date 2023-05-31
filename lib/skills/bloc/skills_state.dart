@@ -16,22 +16,7 @@ class SkillsState extends Equatable {
   SkillsState.initial()
       : this(
           status: SkillsStatus.initial,
-          skills: [
-            const Skill(name: "Cocina"),
-            const Skill(name: "Limpieza"),
-            const Skill(name: "Carpinteria"),
-            const Skill(name: "Tecnología"),
-            const Skill(name: "Pintura"),
-            const Skill(name: "Cuidado de mascotas"),
-            const Skill(name: "Flete"),
-            const Skill(name: "Portería"),
-            const Skill(name: "Jardinería"),
-            const Skill(name: "Plomería"),
-            const Skill(name: "Electricidad"),
-            const Skill(name: "Guardería"),
-            const Skill(name: "Fontanería"),
-            const Skill(name: "Mecánico"),
-          ],
+          skills: [],
         );
 
   final SkillsStatus status;

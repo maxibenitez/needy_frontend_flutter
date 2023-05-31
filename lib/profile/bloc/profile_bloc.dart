@@ -17,20 +17,11 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     emit(state.copyWith(status: ProfileStatus.loading));
     try {
       // final skillsSuggested = await _skillsRepository.getSkillsSuggested();
-      final skillsSuggested = [
-        const Skill(name: "Cocina"),
-        const Skill(name: "Limpieza"),
-      ];
+      final skillsSuggested = [const Skill(id: 2, name: "carpinteria")];
 
-      final skillsApplied = [
-        const Skill(name: "Cocina"),
-        const Skill(name: "Limpieza"),
-      ];
+      final skillsApplied = [const Skill(id: 2, name: "carpinteria")];
 
-      final mySkills = [
-        const Skill(name: "Cocina"),
-        const Skill(name: "Limpieza"),
-      ];
+      final mySkills = [const Skill(id: 2, name: "carpinteria")];
       emit(state.copyWith(
         status: ProfileStatus.loaded,
         myNeeds: skillsSuggested,

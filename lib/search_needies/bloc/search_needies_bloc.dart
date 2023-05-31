@@ -20,22 +20,7 @@ class SearchNeediesBloc extends Bloc<SearchNeediesEvent, SearchNeediesState> {
     emit(state.copyWith(status: SearchNeediesStatus.loading));
     try {
       // final skillsSuggested = await _skillsRepository.getSkillsSuggested();
-      final skillsSuggested = [
-        const Skill(name: "Cocina"),
-        const Skill(name: "Limpieza"),
-        const Skill(name: "Carpinteria"),
-        const Skill(name: "Tecnología"),
-        const Skill(name: "Pintura"),
-        const Skill(name: "Cuidado de mascotas"),
-        const Skill(name: "Flete"),
-        const Skill(name: "Portería"),
-        const Skill(name: "Jardinería"),
-        const Skill(name: "Plomería"),
-        const Skill(name: "Electricidad"),
-        const Skill(name: "Guardería"),
-        const Skill(name: "Fontanería"),
-        const Skill(name: "Mecánico"),
-      ];
+      final skillsSuggested = [const Skill(id: 2, name: "carpinteria")];
       emit(state.copyWith(
         status: SearchNeediesStatus.loaded,
         skillsSuggested: skillsSuggested,
@@ -51,22 +36,7 @@ class SearchNeediesBloc extends Bloc<SearchNeediesEvent, SearchNeediesState> {
   ) async {
     final query = event.query;
     if (query.isEmpty) {
-      final skillsSuggested = [
-        const Skill(name: "Cocina"),
-        const Skill(name: "Limpieza"),
-        const Skill(name: "Carpinteria"),
-        const Skill(name: "Tecnología"),
-        const Skill(name: "Pintura"),
-        const Skill(name: "Cuidado de mascotas"),
-        const Skill(name: "Flete"),
-        const Skill(name: "Portería"),
-        const Skill(name: "Jardinería"),
-        const Skill(name: "Plomería"),
-        const Skill(name: "Electricidad"),
-        const Skill(name: "Guardería"),
-        const Skill(name: "Fontanería"),
-        const Skill(name: "Mecánico"),
-      ];
+      final skillsSuggested = [const Skill(id: 2, name: "carpinteria")];
       emit(state.copyWith(
         status: SearchNeediesStatus.loaded,
         skillsSuggested: skillsSuggested,
