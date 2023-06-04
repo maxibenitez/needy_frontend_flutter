@@ -17,6 +17,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.10.0"
+  api_repository:
+    dependency: "direct main"
+    description:
+      path: "packages/api_repository"
+      relative: true
+    source: path
+    version: "0.0.1"
   args:
     dependency: transitive
     description:
@@ -254,7 +261,7 @@ packages:
   needy_app_ui:
     dependency: "direct main"
     description:
-      path: needy_app_ui
+      path: "packages/needy_app_ui"
       relative: true
     source: path
     version: "0.0.1"
@@ -416,5 +423,5 @@ packages:
     source: hosted
     version: "3.1.1"
 sdks:
-  dart: ">=3.0.0-0 <4.0.0"
+  dart: ">=3.0.1 <4.0.0"
   flutter: ">=2.11.0-0.1.pre"
