@@ -79,38 +79,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         emit(state.copyWith(status: LoginStatus.error));
         throw Exception('Error al llamar a la API');
       }
-
-      // final emailValid = StringValidation.emailValidation.hasMatch(state.email);
-      // final passwordValid = state.password.length >= 6;
-
-      // if (emailValid && passwordValid) {
-      //   final response = await http.post(
-      //     Uri.parse('https://localhost:7008/api/auth/login'),
-      //     headers: <String, String>{
-      //       'Content-Type': 'application/json; charset=UTF-8',
-      //     },
-      //     body: jsonEncode(<String, dynamic>{
-      //       'email': state.email,
-      //       'password': state.password,
-      //     }),
-      //   );
-
-      //   if (response.statusCode == 200) {
-      //     final data = jsonDecode(response.body);
-      //     emit(state.copyWith(status: LoginStatus.success));
-      //   } else {
-      //     emit(state.copyWith(status: LoginStatus.error));
-      //     throw Exception('Error al llamar a la API');
-      //   }
-      // } else {
-      //   emit(
-      //     state.copyWith(
-      //       status: LoginStatus.error,
-      //       emailValid: emailValid,
-      //       passwordValid: passwordValid,
-      //     ),
-      //   );
-      // }
     } catch (e) {
       emit(
         state.copyWith(

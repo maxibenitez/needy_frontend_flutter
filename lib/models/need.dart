@@ -1,5 +1,7 @@
-import 'package:api_repository/models/models.dart';
 import 'package:equatable/equatable.dart';
+import 'package:needy_frontend/models/models.dart';
+
+part 'need.g.dart';
 
 class Need extends Equatable {
   const Need({
@@ -51,6 +53,12 @@ class Need extends Equatable {
       requestedSkill: requestedSkill ?? this.requestedSkill,
     );
   }
+
+  /// A serialized constructor
+  factory Need.fromJson(Map<String, dynamic> json) => _$NeedFromJson(json);
+
+  /// A serializer
+  Map<String, dynamic> toJson() => _$NeedToJson(this);
 
   @override
   List<Object?> get props => [

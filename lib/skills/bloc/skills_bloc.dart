@@ -1,11 +1,11 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:api_repository/models/skill.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
+import 'package:needy_frontend/models/models.dart';
 
 part 'skills_event.dart';
 part 'skills_state.dart';
@@ -47,19 +47,12 @@ class SkillsBloc extends Bloc<SkillsEvent, SkillsState> {
       if (response.statusCode == 200) {
         final request = jsonDecode(response.body);
         final data = request['results'];
-        final bool validateData = data != null;
 
-        List<Skill> skills = [];
-
-        //TODO: Chequear esto
-        if (validateData) {
-          for (var item in data) {
-            skills.add(Skill(
-              id: item["id"],
-              name: item["name"],
-            ));
-          }
+        final skills = <Skill>[];
+        for (final json in data) {
+          skills.add(Skill.fromJson(json));
         }
+
         emit(state.copyWith(skills: skills, status: SkillsStatus.loaded));
       }
     } catch (e) {

@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:api_repository/api_repository.dart';
-import 'package:api_repository/models/models.dart';
+import 'package:needy_frontend/models/models.dart';
 
 class SkillsController {
   Future<List<Skill>> getSkills() async {
