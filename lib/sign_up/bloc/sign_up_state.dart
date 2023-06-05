@@ -35,7 +35,7 @@ class SignUpState extends Equatable {
           phone: '',
           gender: "Male",
           igAccount: '',
-          id: 0,
+          id: '',
           birthDate: DateTime.now(),
           zone: 'Lavalleja',
         );
@@ -49,7 +49,7 @@ class SignUpState extends Equatable {
   final String phone;
   final String gender;
   final String igAccount;
-  final int id;
+  final String id;
   final DateTime birthDate;
   final String zone;
 
@@ -63,7 +63,7 @@ class SignUpState extends Equatable {
     String? phone,
     String? gender,
     String? igAccount,
-    int? id,
+    String? id,
     DateTime? birthDate,
     String? zone,
   }) {

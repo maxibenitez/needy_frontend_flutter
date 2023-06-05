@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:api_repository/api_repository.dart';
+import 'package:needy_frontend/controllers/controllers.dart';
 
 class AuthController {
   static Future<void> registerUser({
@@ -48,9 +49,10 @@ class AuthController {
         password: password,
       );
 
-      if (response.statusCode == 200) {
-        final request = jsonDecode(response.body);
-        print(request);
+      if (response.statusCode < 200 || response.statusCode > 299) {
+        final data = jsonDecode(response.body);
+        throw ApiResponseFailure(
+            statusCode: response.statusCode, reasonPhrase: data['message']);
       }
     } catch (e) {
       print(e);

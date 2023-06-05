@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:needy_app_ui/needy_app_ui.dart';
-import 'package:needy_frontend/models/skill.dart';
+import 'package:needy_frontend/home/home.dart';
+import 'package:needy_frontend/models/models.dart';
 import 'package:needy_frontend/needy/view/view.dart';
 import 'package:needy_frontend/search_needies/search_needies.dart';
 
@@ -11,13 +12,17 @@ class SearchNeediesView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final needies =
-        context.select((SearchNeediesBloc bloc) => bloc.state.skillsSuggested);
+        context.select((SearchNeediesBloc bloc) => bloc.state.neediesSuggested);
 
     return BlocListener<SearchNeediesBloc, SearchNeediesState>(
       listener: (context, state) {
         if (state.status == SearchNeediesStatus.error) {
-          // Handle Error
-          Navigator.of(context).pop();
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: const Text("Error al cargar los datos"),
+              backgroundColor: Theme.of(context).colorScheme.error,
+            ),
+          );
         }
       },
       child: Scaffold(
@@ -39,7 +44,7 @@ class Filter extends StatelessWidget {
     required this.needies,
   });
 
-  final List<Skill> needies;
+  final List<Need> needies;
 
   @override
   Widget build(BuildContext context) {
@@ -82,6 +87,9 @@ class Filter extends StatelessWidget {
               itemCount: needies.length,
             ),
           ),
+        ),
+        const BottomIconsRow(
+          iconColor: NAColors.primary,
         ),
       ],
     );

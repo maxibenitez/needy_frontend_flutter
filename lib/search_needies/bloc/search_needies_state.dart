@@ -10,31 +10,31 @@ enum SearchNeediesStatus {
 class SearchNeediesState extends Equatable {
   const SearchNeediesState({
     required this.status,
-    required this.skillsSuggested,
+    required this.neediesSuggested,
   });
 
   const SearchNeediesState.initial()
       : this(
           status: SearchNeediesStatus.initial,
-          skillsSuggested: const [],
+          neediesSuggested: const [],
         );
 
   final SearchNeediesStatus status;
-  final List<Skill> skillsSuggested;
+  final List<Need> neediesSuggested;
 
   SearchNeediesState copyWith({
     SearchNeediesStatus? status,
-    List<Skill>? skillsSuggested,
+    List<Need>? neediesSuggested,
   }) {
     return SearchNeediesState(
       status: status ?? this.status,
-      skillsSuggested: skillsSuggested ?? this.skillsSuggested,
+      neediesSuggested: neediesSuggested ?? this.neediesSuggested,
     );
   }
 
   @override
   List<Object?> get props => [
         status,
-        skillsSuggested,
+        neediesSuggested,
       ];
 }

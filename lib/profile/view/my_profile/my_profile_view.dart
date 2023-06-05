@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:needy_app_ui/needy_app_ui.dart';
+import 'package:needy_frontend/home/home.dart';
 import 'package:needy_frontend/profile/profile.dart';
 
 class MyProfileView extends StatefulWidget {
@@ -39,36 +40,53 @@ class _MyProfileViewState extends State<MyProfileView>
           title: "Profile",
           context: context,
         ),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const NAPictureContainer(
-              src: "https://picsum.photos/200/300",
-            ),
-            const Text("CAROL GLASS"),
-            TabBar(
-              controller: _tabController,
-              labelColor: NAColors.primary,
-              indicatorColor: NAColors.primary,
-              tabs: const [
-                Tab(text: 'My Needs'),
-                Tab(text: 'My Applies'),
-                Tab(text: 'My Skills'),
-              ],
-            ),
-            Expanded(
-              child: TabBarView(
-                controller: _tabController,
-                children: const [
-                  MyNeedsTab(),
-                  MyAppliesTab(),
-                  MySkillsTab(),
-                ],
-              ),
-            ),
+        body: MyProfileWidget(tabController: _tabController),
+      ),
+    );
+  }
+}
+
+class MyProfileWidget extends StatelessWidget {
+  const MyProfileWidget({
+    super.key,
+    required TabController tabController,
+  }) : _tabController = tabController;
+
+  final TabController _tabController;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        const NAPictureContainer(
+          src: "https://picsum.photos/200/300",
+        ),
+        const Text("CAROL GLASS"),
+        TabBar(
+          controller: _tabController,
+          labelColor: NAColors.primary,
+          indicatorColor: NAColors.primary,
+          tabs: const [
+            Tab(text: 'My Needs'),
+            Tab(text: 'My Applies'),
+            Tab(text: 'My Skills'),
           ],
         ),
-      ),
+        Expanded(
+          child: TabBarView(
+            controller: _tabController,
+            children: const [
+              MyNeedsTab(),
+              MyAppliesTab(),
+              MySkillsTab(),
+            ],
+          ),
+        ),
+        const BottomIconsRow(
+          iconColor: NAColors.primary,
+        )
+      ],
     );
   }
 }

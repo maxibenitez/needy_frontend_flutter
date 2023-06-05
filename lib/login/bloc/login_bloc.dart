@@ -3,8 +3,8 @@ import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
-import 'package:needy_frontend/utils/utils.dart';
 
 part 'login_event.dart';
 part 'login_state.dart';
@@ -39,6 +39,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   Future<void> _onEmailChanged(
       LoginEmailChanged event, Emitter<LoginState> emit) async {
     final emailChanged = event.email;
+    print(emailChanged);
     emit(
       state.copyWith(
         email: emailChanged,
@@ -53,37 +54,63 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     emit(state.copyWith(status: LoginStatus.loading));
     await Future<void>.delayed(const Duration(seconds: 1));
     try {
-      final emailValid = StringValidation.emailValidation.hasMatch(state.email);
-      final passwordValid = state.password.length >= 6;
+      //TODO: Borrar esto
+      emit(state.copyWith(status: LoginStatus.success));
+      final body = {
+        'email': state.email,
+        'password': state.password,
+      };
+      final Response response = await http.post(
+          Uri.parse("https://localhost:7008/api/auth/login"),
+          headers: <String, String>{'Content-Type': 'application/json'},
+          body: json.encode(body));
 
-      if (emailValid && passwordValid) {
-        final response = await http.post(
-          Uri.parse('https://localhost:7008/api/auth/login'),
-          headers: <String, String>{
-            'Content-Type': 'application/json; charset=UTF-8',
-          },
-          body: jsonEncode(<String, dynamic>{
-            'email': state.email,
-            'password': state.password,
-          }),
-        );
-
-        if (response.statusCode == 200) {
-          final data = jsonDecode(response.body);
-          emit(state.copyWith(status: LoginStatus.success));
-        } else {
-          emit(state.copyWith(status: LoginStatus.error));
-          throw Exception('Error al llamar a la API');
-        }
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        print(data);
+        emit(state.copyWith(status: LoginStatus.success));
+      } else if (response.statusCode == 400) {
+        final data = jsonDecode(response.body);
+        final message = data['message'];
+        print(message);
+        emit(state.copyWith(status: LoginStatus.error));
+        throw Exception(message);
       } else {
-        emit(
-          state.copyWith(
-            status: LoginStatus.error,
-            emailValid: emailValid,
-            passwordValid: passwordValid,
-          ),
-        );
+        emit(state.copyWith(status: LoginStatus.error));
+        throw Exception('Error al llamar a la API');
       }
+
+      // final emailValid = StringValidation.emailValidation.hasMatch(state.email);
+      // final passwordValid = state.password.length >= 6;
+
+      // if (emailValid && passwordValid) {
+      //   final response = await http.post(
+      //     Uri.parse('https://localhost:7008/api/auth/login'),
+      //     headers: <String, String>{
+      //       'Content-Type': 'application/json; charset=UTF-8',
+      //     },
+      //     body: jsonEncode(<String, dynamic>{
+      //       'email': state.email,
+      //       'password': state.password,
+      //     }),
+      //   );
+
+      //   if (response.statusCode == 200) {
+      //     final data = jsonDecode(response.body);
+      //     emit(state.copyWith(status: LoginStatus.success));
+      //   } else {
+      //     emit(state.copyWith(status: LoginStatus.error));
+      //     throw Exception('Error al llamar a la API');
+      //   }
+      // } else {
+      //   emit(
+      //     state.copyWith(
+      //       status: LoginStatus.error,
+      //       emailValid: emailValid,
+      //       passwordValid: passwordValid,
+      //     ),
+      //   );
+      // }
     } catch (e) {
       emit(
         state.copyWith(

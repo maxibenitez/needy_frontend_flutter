@@ -19,3 +19,10 @@ class GetSkills extends SkillsEvent {
   @override
   List<Object?> get props => [];
 }
+
+class ContinueSubmitted extends SkillsEvent {
+  const ContinueSubmitted();
+
+  @override
+  List<Object?> get props => [];
+}

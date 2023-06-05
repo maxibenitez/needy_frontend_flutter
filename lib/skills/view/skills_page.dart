@@ -16,7 +16,7 @@ class SkillsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => SkillsBloc(),
+      create: (_) => SkillsBloc()..add(const GetSkills()),
       child: const SkillsView(),
     );
   }

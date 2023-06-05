@@ -165,6 +165,7 @@ class NATextField extends StatelessWidget {
         cursorColor: Theme.of(context).colorScheme.onBackground,
         style: NATextStyle.bodyText1.copyWith(
           fontWeight: FontWeight.w500,
+          color: NAColors.black,
         ),
         onFieldSubmitted: onSubmitted,
         decoration: InputDecoration(

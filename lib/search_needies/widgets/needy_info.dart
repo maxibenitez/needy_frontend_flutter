@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:needy_app_ui/needy_app_ui.dart';
 import 'package:needy_frontend/models/models.dart';
 
@@ -8,7 +9,7 @@ class NeedyInfo extends StatelessWidget {
     required this.needy,
   });
 
-  final Skill needy;
+  final Need needy;
 
   @override
   Widget build(BuildContext context) {
@@ -25,18 +26,13 @@ class NeedyInfo extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              needy.name,
+              needy.requestedSkill.name,
               style:
                   NATextStyle.subtitle1.copyWith(fontWeight: FontWeight.bold),
             ),
             Text(
-              // needies[index].location,
-              "Location: Parque Batlle",
-              style: NATextStyle.subtitle2,
-            ),
-            Text(
               // needies[index].description,
-              "Date: 12/12/2021",
+              "Date: ${DateFormat('yyyy-MM-dd').format(needy.creationDate)}",
               style: NATextStyle.subtitle2,
             ),
           ])

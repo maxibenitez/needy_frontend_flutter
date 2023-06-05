@@ -1,7 +1,10 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:http/http.dart';
+import 'package:http/http.dart' as http;
 import 'package:needy_frontend/models/models.dart';
 
 part 'search_needies_event.dart';
@@ -19,12 +22,39 @@ class SearchNeediesBloc extends Bloc<SearchNeediesEvent, SearchNeediesState> {
   ) async {
     emit(state.copyWith(status: SearchNeediesStatus.loading));
     try {
-      // final skillsSuggested = await _skillsRepository.getSkillsSuggested();
-      final skillsSuggested = [const Skill(id: 2, name: "carpinteria")];
-      emit(state.copyWith(
-        status: SearchNeediesStatus.loaded,
-        skillsSuggested: skillsSuggested,
-      ));
+      emit(state.copyWith(status: SearchNeediesStatus.loaded));
+      final Response response = await http.get(
+        Uri.parse("https://localhost:7008/api/needs/get-needs"),
+        headers: <String, String>{'Content-Type': 'application/json'},
+      );
+
+      if (response.statusCode == 200) {
+        final request = jsonDecode(response.body);
+        final data = request['results'];
+        final bool validateData = data != null;
+
+        List<Need> needs = [];
+        if (validateData) {
+          for (var item in data) {
+            needs.add(Need(
+              id: item["id"],
+              requestor: item["requestor"],
+              appliers: item["appliers"],
+              accepetedApplier: item["accepetedApplier"],
+              creationDate: item["creationDate"],
+              description: item["description"],
+              needDate: item["needDate"],
+              status: item["status"],
+              acceptedDate: item["acceptedDate"],
+              requestedSkill: item["requestedSkill"],
+            ));
+          }
+        }
+        emit(state.copyWith(
+          status: SearchNeediesStatus.loaded,
+          neediesSuggested: needs,
+        ));
+      }
     } catch (e) {
       emit(state.copyWith(status: SearchNeediesStatus.error));
     }
@@ -36,18 +66,18 @@ class SearchNeediesBloc extends Bloc<SearchNeediesEvent, SearchNeediesState> {
   ) async {
     final query = event.query;
     if (query.isEmpty) {
-      final skillsSuggested = [const Skill(id: 2, name: "carpinteria")];
       emit(state.copyWith(
         status: SearchNeediesStatus.loaded,
-        skillsSuggested: skillsSuggested,
+        neediesSuggested: state.neediesSuggested,
       ));
       return;
     }
-    final skillsSuggested = state.skillsSuggested
-        .where((element) =>
-            element.name.toLowerCase().contains(query.toLowerCase()))
+    final neediesSuggested = state.neediesSuggested
+        .where((element) => element.requestedSkill.name
+            .toLowerCase()
+            .contains(query.toLowerCase()))
         .toList();
 
-    emit(state.copyWith(skillsSuggested: skillsSuggested));
+    emit(state.copyWith(neediesSuggested: neediesSuggested));
   }
 }

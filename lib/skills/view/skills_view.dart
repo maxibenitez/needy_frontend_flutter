@@ -14,9 +14,21 @@ class SkillsView extends StatelessWidget {
 
     return BlocListener<SkillsBloc, SkillsState>(
       listener: (context, state) {
+        if (state.status == SkillsStatus.alreadyOneSkillSelected) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text("No se puede seleccionar mas de un servicio"),
+              duration: Duration(seconds: 2),
+            ),
+          );
+        }
         if (state.status == SkillsStatus.error) {
-          // Handle Error
-          Navigator.of(context).pop();
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text("Ocurrio un error"),
+              duration: Duration(seconds: 2),
+            ),
+          );
         }
       },
       child: Scaffold(

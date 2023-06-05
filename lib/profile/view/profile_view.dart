@@ -97,13 +97,16 @@ class _ProfileInfo extends StatelessWidget {
             ),
           ],
         ),
+        const SizedBox(
+          height: NASpacing.md,
+        ),
         Text(
           "Difficulties",
           style: NATextStyle.headline3
               .copyWith(color: NAColors.primary, fontSize: 20),
         ),
         const SizedBox(
-          height: NASpacing.md,
+          height: NASpacing.lg,
         ),
         const Row(
           children: [
