@@ -1,5 +1,5 @@
+import 'package:api_repository/models/models.dart';
 import 'package:equatable/equatable.dart';
-import 'package:needy_frontend/models/models.dart';
 
 class Need extends Equatable {
   const Need({

@@ -1,11 +1,11 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:api_repository/models/models.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
-import 'package:needy_frontend/models/models.dart';
 
 part 'search_needies_event.dart';
 part 'search_needies_state.dart';

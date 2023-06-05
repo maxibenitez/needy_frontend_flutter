@@ -1,7 +1,7 @@
+import 'package:api_repository/models/models.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:needy_app_ui/needy_app_ui.dart';
-import 'package:needy_frontend/models/models.dart';
 
 class NeedyInfo extends StatelessWidget {
   const NeedyInfo({

@@ -1,11 +1,11 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:api_repository/models/skill.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
-import 'package:needy_frontend/models/skill.dart';
 
 part 'skills_event.dart';
 part 'skills_state.dart';

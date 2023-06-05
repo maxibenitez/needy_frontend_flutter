@@ -1,8 +1,8 @@
+import 'package:api_repository/models/models.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:needy_app_ui/needy_app_ui.dart';
 import 'package:needy_frontend/home/home.dart';
-import 'package:needy_frontend/models/models.dart';
 import 'package:needy_frontend/needy/view/view.dart';
 import 'package:needy_frontend/search_needies/search_needies.dart';
 

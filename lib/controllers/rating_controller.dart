@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:api_repository/api_repository.dart';
-import 'package:needy_frontend/models/rating.dart';
+import 'package:api_repository/models/rating.dart';
 
 class RatingController {
   Future<List<Rating>> getRatingsByUser({required String id}) async {

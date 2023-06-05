@@ -1,4 +1,4 @@
-import 'package:needy_frontend/models/models.dart';
+import 'package:api_repository/models/models.dart';
 
 class User {
   User({

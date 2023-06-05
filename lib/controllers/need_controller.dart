@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 import 'package:api_repository/api_repository.dart';
+import 'package:api_repository/models/models.dart';
 import 'package:http/http.dart';
 import 'package:needy_frontend/controllers/controllers.dart';
-import 'package:needy_frontend/models/models.dart';
 
 class NeedController {
   void _checkApiResponseFailure(Response response) {

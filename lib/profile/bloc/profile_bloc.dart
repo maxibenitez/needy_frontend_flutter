@@ -1,8 +1,8 @@
 import 'dart:async';
 
+import 'package:api_repository/models/models.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:needy_frontend/models/models.dart';
 
 part 'profile_event.dart';
 part 'profile_state.dart';
